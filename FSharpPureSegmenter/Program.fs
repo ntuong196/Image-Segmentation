@@ -4,10 +4,14 @@
 let main argv =
     // load a Tiff image
     let image = TiffModule.loadImage argv.[0]
+    // Alternate code:
+    // let image = TiffModule.loadImage "..//TestImages//L15-3792E-1717N-Q4.tif"
 
     // testing using sub-image of size 32x32 pixels
+    // let N =5, execution time: 5 mins 11 secs
+    // let N =4, execution time: 14 secs
     let N = 5
-
+   
     // increasing this threshold will result in more segment merging and therefore fewer final segments
     let threshold = 800.0
 
@@ -15,6 +19,6 @@ let main argv =
     let segmentation = SegmentationModule.segment image N threshold
 
     // draw the (top left corner of the) original image but with the segment boundaries overlayed in blue
-    TiffModule.overlaySegmentation image "segmented.tif" N segmentation
+    TiffModule.overlaySegmentation image "pureSegmented.tif" N segmentation
 
     0 // return an integer exit code
